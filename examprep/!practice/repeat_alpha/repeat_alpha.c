@@ -6,7 +6,7 @@
 /*   By: gscott <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 03:43:01 by gscott            #+#    #+#             */
-/*   Updated: 2018/06/01 04:05:00 by gscott           ###   ########.fr       */
+/*   Updated: 2018/06/01 04:07:48 by gscott           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,14 @@ int	main(int argc, char **argv)
 	
 	i = 0;
 	c = '\n';
-	if (argc != 2)
+	if (argc == 2)
 	{
-		write(1, &c, 1);
-		return (0);
+		while (argv[1][i])
+		{
+			repeat_alpha(argv[1][i]);
+			i++;
+		}
 	}
-	while (argv[1][i])
-	{
-		repeat_alpha(argv[1][i]);
-		i++;
-	}
+	write(1, &c, 1);
 	return (0);
 }
