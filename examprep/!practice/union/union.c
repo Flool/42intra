@@ -1,51 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search_and_replace.c                               :+:      :+:    :+:   */
+/*   union.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gscott <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/04 21:09:52 by gscott            #+#    #+#             */
-/*   Updated: 2018/06/04 21:29:28 by gscott           ###   ########.fr       */
+/*   Created: 2018/06/05 13:19:54 by gscott            #+#    #+#             */
+/*   Updated: 2018/06/05 21:02:57 by gscott           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putstr(char *str)
+int	verif_char(char *str, char c, int index)
 {
 	int i;
 
 	i = 0;
-	while (str[i])
+	while (i < index)
 	{
-		ft_putchar(str[i]);
+		if (str[i] == c)
+			return (0);
 		i++;
 	}
+	return (1);
 }
 
-char *f_and_r(char *str, char *old, char *new)
+
+void	do_union(char *s1, char *s2)
 {
 	int i;
 
 	i = 0;
-	while (str[i])
+	while (s1[i])
 	{
-		if (str[i] == old[0])
-			str[i] = new[0];
+		if (verif_char(s1, s1[i], i))
+			write(1, &s1[i], 1);
 		i++;
 	}
-	return (str);
+	i = 0;
+	while (s2[i])
+	{
+		if (verif_char(s1, s2[i], i) && verif_char(s2, s2[i], i))
+			write(1, &s2[i], 1);
+		i++;
+	}
 }
 
 int	main(int argc, char **argv)
 {
-	if (argc == 4 && !argv[2][1] && !argv[3][1])
-		ft_putstr(f_and_r(argv[1], argv[2], argv[3]));	
-	ft_putchar(10);
+	if (argc == 3)
+		do_union(argv[1], argv[2]);
+	write(1, "\n", 1);
 	return (0);
 }

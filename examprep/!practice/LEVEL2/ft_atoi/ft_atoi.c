@@ -1,51 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search_and_replace.c                               :+:      :+:    :+:   */
+/*   atoi.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gscott <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/04 21:09:52 by gscott            #+#    #+#             */
-/*   Updated: 2018/06/04 21:29:28 by gscott           ###   ########.fr       */
+/*   Created: 2018/06/05 21:27:52 by gscott            #+#    #+#             */
+/*   Updated: 2018/06/06 01:50:59 by gscott           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <unistd.h>
-
-void	ft_putchar(char c)
+int	ft_atoi(char *str)
 {
-	write(1, &c, 1);
-}
+	int i = 0;
+	int num = 0;
+	int neg = 1;
 
-void	ft_putstr(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
+	if (str[0] == '-')
 	{
-		ft_putchar(str[i]);
+		neg = -1;
 		i++;
 	}
-}
 
-char *f_and_r(char *str, char *old, char *new)
-{
-	int i;
-
-	i = 0;
 	while (str[i])
 	{
-		if (str[i] == old[0])
-			str[i] = new[0];
+		num += str[i] - '0';
+		if(str[i + 1])
+			num *= 10;
 		i++;
 	}
-	return (str);
+	return num * neg;
 }
 
-int	main(int argc, char **argv)
+#include <stdio.h>
+#include <stdlib.h>
+int	main(void)
 {
-	if (argc == 4 && !argv[2][1] && !argv[3][1])
-		ft_putstr(f_and_r(argv[1], argv[2], argv[3]));	
-	ft_putchar(10);
+	printf("atoi(1234) is %d\n", atoi("1234"));
+	printf("ft_atoi(1234) is %d\n", ft_atoi("1234"));
 	return (0);
 }
