@@ -3,54 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   epur_str.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angavrel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gscott <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/21 12:05:27 by angavrel          #+#    #+#             */
-/*   Updated: 2018/06/06 18:40:03 by gscott           ###   ########.fr       */
+/*   Created: 2018/06/06 17:41:47 by gscott            #+#    #+#             */
+/*   Updated: 2018/06/06 18:30:25 by gscott           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int		ft_strlen(char *s)
+void	ft_putchar(char c)
 {
-	int i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	write(1, &c, 1);
 }
 
-int		ft_isblank(char c)
+int	is_space(char c)
 {
 	if (c == ' ' || c == '\t')
-		return (1);
+		return 1;
 	if (c >= 9 && c <= 13)
-		return (1);
-	return (0);
+		return 1;
+	return 0;
 }
 
-void	epurstr(char *s)
+void	epur_str(char *str)
 {
-	int len = ft_strlen(s);
+	int i = 0;
+	int flag = 0;
 
-	while (len && ft_isblank(s[len - 1]))
-		--len;
-	while (len && ft_isblank(*s) && *s++)
-		--len;
-	while (len--)
+	while (str[i])
 	{
-		if (!ft_isblank(*s) || (*(s + 1) && !ft_isblank(*(s + 1))))
-			write(1, s, 1);
-		s++;
+		if (is_space(str[i]))
+		{
+			if (flag && !is_space(str[i + 1]) && str[i + 1])
+			{
+				ft_putchar(' ');
+				flag = 0;
+			}
+		}
+		else 
+		{
+			ft_putchar(str[i]);
+			flag = 1;
+		}
+		i++;
 	}
 }
 
-int		main(int ac, char **av)
+int main(int argc, char **argv)
 {
-	if (ac == 2 && *av[1])
-		epurstr(av[1]);
-	write(1, "\n", 1);
+	if (argc == 2)
+		epur_str(argv[1]);
+	ft_putchar(10);
 	return (0);
 }
