@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_size.c                                     :+:      :+:    :+:   */
+/*   swap_bits.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angavrel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gscott <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/01 16:54:57 by angavrel          #+#    #+#             */
-/*   Updated: 2018/06/06 23:19:11 by gscott           ###   ########.fr       */
+/*   Created: 2018/06/07 21:41:45 by gscott            #+#    #+#             */
+/*   Updated: 2018/06/07 21:46:42 by gscott           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
-
-int		ft_list_size(t_list *begin_list)
-{
-	int		i;
-
-	i = 0;
-	while (begin_list)
-	{
-		begin_list = begin_list->next;
-		++i;
-	}
-	return (i);
+unsigned char	swap_bits(unsigned char octet)
+{			
+	return (octet >> 4 | octet << 4);
 }

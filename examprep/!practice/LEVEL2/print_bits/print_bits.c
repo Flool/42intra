@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_size.c                                     :+:      :+:    :+:   */
+/*   print_bits.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angavrel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gscott <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/01 16:54:57 by angavrel          #+#    #+#             */
-/*   Updated: 2018/06/06 23:19:11 by gscott           ###   ########.fr       */
+/*   Created: 2018/06/07 21:36:58 by gscott            #+#    #+#             */
+/*   Updated: 2018/06/07 21:41:32 by gscott           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
-
-int		ft_list_size(t_list *begin_list)
+void	print_bits(unsigned char octet)
 {
-	int		i;
-
-	i = 0;
-	while (begin_list)
+	int i = 128;
+	while (i > 0)
 	{
-		begin_list = begin_list->next;
-		++i;
+		i & octet ? write(1, "1", 1) : write(1, "0", 1);
+		i /= 2;
 	}
-	return (i);
 }
